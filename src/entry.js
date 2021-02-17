@@ -1,7 +1,7 @@
 import React from "react";
-import {TextField} from '@material-ui/core'
+// import {TextField} from '@material-ui/core'
 import Calculator from "./Calculator/calculator";
-import {Button} from '@material-ui/core';
+// import {Button} from '@material-ui/core';
 
 export default class Entry extends React.Component {
 
@@ -23,7 +23,7 @@ export default class Entry extends React.Component {
                    <form className="bg-color">
                        <h1>Calculator</h1>
                        <div className="name-field">
-                           <TextField
+                           <input
                                onChange={async (e) =>
                                    await this.setState({
                                        name: e.target.value
@@ -35,25 +35,25 @@ export default class Entry extends React.Component {
                        </div>
                        {
                            this.state.name === '' &&
-                           <Button
+                           <button
                                disabled
-                               variant="contained"
+                               // variant="contained"
                            >
                                Enter
-                           </Button>
+                           </button>
 
                        }
 
                        {
                            this.state.name !== '' &&
-                           <Button
+                           <button
 
                                color={"secondary"}
-                               variant="contained"
+                               // variant="contained"
                                onClick={this.submit}
                            >
                                Enter
-                           </Button>
+                           </button>
 
                        }
                    </form>

@@ -1,7 +1,7 @@
 import React from "react";
 import io from 'socket.io-client'
-import {TextField} from '@material-ui/core'
-import {Button} from '@material-ui/core';
+// import {TextField} from '@material-ui/core'
+// import {Button} from '@material-ui/core';
 
 const socket = io('http://calculator-app-server.herokuapp.com/')
 
@@ -89,7 +89,7 @@ export default class Calculator extends React.Component {
                     <form>
                         <h1>Calculator</h1>
                         <div className="name-field">
-                            <TextField
+                            <input
                                 name="name"
                                 value={this.state.name}
                                 disabled
@@ -97,7 +97,7 @@ export default class Calculator extends React.Component {
                             />
                         </div>
                         <div>
-                            <TextField
+                            <input
                                 name="message"
                                 type="number"
                                 onChange={async (e) =>
@@ -129,7 +129,7 @@ export default class Calculator extends React.Component {
                             </select>
                         </div>
                         <div>
-                            <TextField
+                            <input
                                 name="message"
                                 type="number"
                                 onChange={async (e) =>
@@ -139,8 +139,8 @@ export default class Calculator extends React.Component {
                                 }
                                 value={this.state.num2}
                                 id="outlined-multiline-static"
-                                variant="outlined"
-                                label="Second Number"
+                                // variant="outlined"
+                                // label="Second Number"
                             />
                         </div>
                         <div className={"calculate-button"}>
@@ -148,12 +148,12 @@ export default class Calculator extends React.Component {
                                 (this.state.num1 === '' ||
                                     this.state.num2 === ''
                                 ) &&
-                                <Button
+                                <button
                                     disabled
-                                    variant="contained"
+                                    // variant="contained"
                                 >
                                     Calculate
-                                </Button>
+                                </button>
 
                             }
 
@@ -161,14 +161,14 @@ export default class Calculator extends React.Component {
                                 (this.state.num1 !== '' &&
                                     this.state.num2 !== ''
                                 ) &&
-                                <Button
+                                <button
 
                                     color={"secondary"}
-                                    variant="contained"
+                                    // variant="contained"
                                     onClick={this.calculate}
                                 >
                                     Calculator Log
-                                </Button>
+                                </button>
 
                             }
 
