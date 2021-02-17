@@ -1,7 +1,7 @@
 import React from "react";
 import io from 'socket.io-client'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button';
+import {TextField} from '@material-ui/core'
+import {Button} from '@material-ui/core';
 
 const socket = io('http://calculator-app-server.herokuapp.com/')
 
