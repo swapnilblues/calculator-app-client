@@ -1,7 +1,7 @@
 import React from "react";
 import TextField from '@material-ui/core/TextField'
 import Calculator from "./Calculator/calculator";
-import {Button} from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 
 export default class Entry extends React.Component {
 
