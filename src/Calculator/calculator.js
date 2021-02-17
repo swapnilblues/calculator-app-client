@@ -167,7 +167,7 @@ export default class Calculator extends React.Component {
                                     // variant="contained"
                                     onClick={this.calculate}
                                 >
-                                    Calculator Log
+                                    Calculate
                                 </button>
 
                             }
@@ -176,7 +176,7 @@ export default class Calculator extends React.Component {
                         </div>
                     </form>
                     <div className="render-chat">
-                        <h1>Calculate</h1>
+                        <h1>Calculator Log</h1>
                         {this.renderChat()}
                     </div>
                 </div>
