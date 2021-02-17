@@ -20,9 +20,14 @@ export default class Calculator extends React.Component {
         this.updateChat()
     }
 
-    updateChat = () => {
-        socket.on('a', ({ name, message }) => {
-            this.setState({
+    updateChat = async () => {
+        socket.on('a', async ({ name, message }) => {
+            if(this.state.chat.length === 10) {
+                await this.setState({
+                    chat: this.state.chat.slice(1)
+                })
+            }
+            await this.setState({
                 chat: [...this.state.chat, {name, message}]
             })
         })

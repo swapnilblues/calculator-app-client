@@ -28,6 +28,7 @@ export default class Entry extends React.Component {
                                        name: e.target.value
                                    })
                                }
+                               placeholder={"Enter Name"}
                                value={this.state.name}
                            />
                        </div>
