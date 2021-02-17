@@ -3,7 +3,7 @@ import io from 'socket.io-client'
 import TextField from '@material-ui/core/TextField'
 import {Button} from '@material-ui/core';
 
-const socket = io('http://localhost:4000')
+const socket = io('http://calculator-app-server.herokuapp.com/')
 
 export default class Calculator extends React.Component {
 
@@ -42,7 +42,7 @@ export default class Calculator extends React.Component {
 
         if (this.state.num2 === 0 && this.state.symbol === '/') {
             await this.setState({
-                message: 'CANNOT DIVIDE BY ZERO!'
+                message: 'Cannot divide by 0!'
             })
         } else {
             let ans = 0
