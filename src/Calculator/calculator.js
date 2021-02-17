@@ -8,6 +8,9 @@ export default class Calculator extends React.Component {
 
     state = {
         message: '',
+        num1: '',
+        num2: '',
+        symbol: '+',
         name: '',
         chat : [],
         nameEntered: false
@@ -33,6 +36,36 @@ export default class Calculator extends React.Component {
         })
     }
 
+    calculate = async (e) => {
+        e.preventDefault()
+
+        if (this.state.num2 === 0 && this.state.symbol === '/') {
+            await this.setState({
+                message: 'CANNOT DIVIDE BY ZERO!'
+            })
+        }else {
+            let ans = 0
+            switch (this.state.symbol) {
+                case "+": ans = this.state.num1 + this.state.num2
+                    break
+                case "-": ans = this.state.num1 - this.state.num2
+                    break
+                case "x": ans = this.state.num1 * this.state.num2
+                    break
+                default: ans = this.state.num1 / this.state.num2
+            }
+            const m = this.state.num1 + " " + this.state.symbol + this.state.num2 + " = " + ans
+            await this.setState({
+                message: m
+            })
+        }
+
+        await socket.emit('a', this.state.name, this.state.message)
+        await this.setState({
+            message: ''
+        })
+    }
+
     renderChat = () => {
         return this.state.chat.map(({ name, message }, index) => (
             <div key={index}>
@@ -43,48 +76,77 @@ export default class Calculator extends React.Component {
         ))
     }
 
-    onMessageSubmit = async (e) => {
-        e.preventDefault()
-        await socket.emit('a', this.state.name, this.state.message)
-        await this.setState({
-            message: ''
-        })
-    }
+
     render() {
         return (
-            <div className="card">
-                <form onSubmit={this.onMessageSubmit}>
-                    <h1>Calculator</h1>
-                    <div className="name-field">
-                        <TextField
-                            name="name"
-                            value={this.state.name}
-                            disabled
-                            label="Name"
-                        />
+            <div>
+                <div className="card">
+                    <form onSubmit={this.calculate}>
+                        <h1>Calculator</h1>
+                        <div className="name-field">
+                            <TextField
+                                name="name"
+                                value={this.state.name}
+                                disabled
+                                label="Name"
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                name="message"
+                                type="number"
+                                onChange={async (e) =>
+                                    await this.setState({
+                                        num1: e.target.value
+                                    })
+                                }
+                                value={this.state.num1}
+                                id="outlined-multiline-static"
+                                variant="outlined"
+                                label="First Number"
+                            />
+                        </div>
+                        <div className="top-margin bottom-margin">
+                            <select
+                                name="message"
+                                onChange={(e) =>
+                                    this.setState({
+                                        symbol: e.target.value
+                                    })
+                                }
+                                value={this.state.symbol}
+                                id="outlined-multiline-static"
+                            >
+                                <option value="+">+</option>
+                                <option value="-">-</option>
+                                <option value="x">x</option>
+                                <option value="/">/</option>
+                            </select>
+                        </div>
+                        <div>
+                            <TextField
+                                name="message"
+                                type="number"
+                                onChange={async (e) =>
+                                    await this.setState({
+                                        num2: parseInt(e.target.value)
+                                    })
+                                }
+                                value={this.state.num2}
+                                id="outlined-multiline-static"
+                                variant="outlined"
+                                label="Second Number"
+                            />
+                        </div>
+                        <button>Send Message</button>
+                    </form>
+                    <div className="render-chat">
+                        <h1>Calculation Log</h1>
+                        {this.renderChat()}
                     </div>
-                    <div>
-                        <TextField
-                            name="message"
-                            onChange={async (e) =>
-                                await this.setState({
-                                    message: e.target.value
-                                })
-                            }
-                            value={this.state.message}
-                            id="outlined-multiline-static"
-                            variant="outlined"
-                            label="Message"
-                        />
-                    </div>
-                    <button>Send Message</button>
-                </form>
-                <div className="render-chat">
-                    <h1>Calculation Log</h1>
-                    {this.renderChat()}
                 </div>
             </div>
+
         )
     }
 }
-
