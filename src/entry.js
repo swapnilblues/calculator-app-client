@@ -1,4 +1,4 @@
-import React from "react";
+import eReact from "react";
 import TextField from '@material-ui/core/TextField'
 import Calculator from "./Calculator/calculator";
 
