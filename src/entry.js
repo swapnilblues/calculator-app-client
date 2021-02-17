@@ -1,6 +1,7 @@
 import React from "react";
 import TextField from '@material-ui/core/TextField'
 import Calculator from "./Calculator/calculator";
+import {Button} from '@material-ui/core';
 
 export default class Entry extends React.Component {
 
@@ -32,7 +33,29 @@ export default class Entry extends React.Component {
                                label="Name"
                            />
                        </div>
-                       <button onClick={this.submit}>Enter</button>
+                       {
+                           this.state.name === '' &&
+                           <Button
+                               disabled
+                               variant="contained"
+                           >
+                               Enter
+                           </Button>
+
+                       }
+
+                       {
+                           this.state.name !== '' &&
+                           <Button
+
+                               color={"secondary"}
+                               variant="contained"
+                               onClick={this.submit}
+                           >
+                               Enter
+                           </Button>
+
+                       }
                    </form>
                </div>
                }

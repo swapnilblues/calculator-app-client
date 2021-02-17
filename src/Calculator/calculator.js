@@ -1,6 +1,7 @@
 import React from "react";
 import io from 'socket.io-client'
 import TextField from '@material-ui/core/TextField'
+import {Button} from '@material-ui/core';
 
 const socket = io('http://localhost:4000')
 
@@ -12,7 +13,7 @@ export default class Calculator extends React.Component {
         num2: '',
         symbol: '+',
         name: '',
-        chat : [],
+        chat: [],
         nameEntered: false
     }
 
@@ -24,8 +25,8 @@ export default class Calculator extends React.Component {
     }
 
     updateChat = async () => {
-        socket.on('a', async ({ name, message }) => {
-            if(this.state.chat.length === 10) {
+        socket.on('a', async ({name, message}) => {
+            if (this.state.chat.length === 10) {
                 await this.setState({
                     chat: this.state.chat.slice(1)
                 })
@@ -43,18 +44,22 @@ export default class Calculator extends React.Component {
             await this.setState({
                 message: 'CANNOT DIVIDE BY ZERO!'
             })
-        }else {
+        } else {
             let ans = 0
             switch (this.state.symbol) {
-                case "+": ans = this.state.num1 + this.state.num2
+                case "+":
+                    ans = this.state.num1 + this.state.num2
                     break
-                case "-": ans = this.state.num1 - this.state.num2
+                case "-":
+                    ans = this.state.num1 - this.state.num2
                     break
-                case "x": ans = this.state.num1 * this.state.num2
+                case "x":
+                    ans = this.state.num1 * this.state.num2
                     break
-                default: ans = this.state.num1 / this.state.num2
+                default:
+                    ans = this.state.num1 / this.state.num2
             }
-            const m = this.state.num1 + " " + this.state.symbol + this.state.num2 + " = " + ans
+            const m = this.state.num1 + " " + this.state.symbol + " " + this.state.num2 + " = " + ans
             await this.setState({
                 message: m
             })
@@ -67,7 +72,7 @@ export default class Calculator extends React.Component {
     }
 
     renderChat = () => {
-        return this.state.chat.map(({ name, message }, index) => (
+        return this.state.chat.map(({name, message}, index) => (
             <div key={index}>
                 <h3>
                     {name}: <span>{message}</span>
@@ -81,7 +86,7 @@ export default class Calculator extends React.Component {
         return (
             <div>
                 <div className="card">
-                    <form onSubmit={this.calculate}>
+                    <form>
                         <h1>Calculator</h1>
                         <div className="name-field">
                             <TextField
@@ -97,7 +102,7 @@ export default class Calculator extends React.Component {
                                 type="number"
                                 onChange={async (e) =>
                                     await this.setState({
-                                        num1: e.target.value
+                                        num1: parseInt(e.target.value)
                                     })
                                 }
                                 value={this.state.num1}
@@ -138,10 +143,40 @@ export default class Calculator extends React.Component {
                                 label="Second Number"
                             />
                         </div>
-                        <button>Send Message</button>
+                        <div className={"calculate-button"}>
+                            {
+                                (this.state.num1 === '' ||
+                                    this.state.num2 === ''
+                                ) &&
+                                <Button
+                                    disabled
+                                    variant="contained"
+                                >
+                                    Calculate
+                                </Button>
+
+                            }
+
+                            {
+                                (this.state.num1 !== '' &&
+                                    this.state.num2 !== ''
+                                ) &&
+                                <Button
+
+                                    color={"secondary"}
+                                    variant="contained"
+                                    onClick={this.calculate}
+                                >
+                                    Calculator Log
+                                </Button>
+
+                            }
+
+
+                        </div>
                     </form>
                     <div className="render-chat">
-                        <h1>Calculation Log</h1>
+                        <h1>Calculate</h1>
                         {this.renderChat()}
                     </div>
                 </div>
