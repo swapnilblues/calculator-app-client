@@ -3,7 +3,7 @@ import io from 'socket.io-client'
 // import {TextField} from '@material-ui/core'
 // import {Button} from '@material-ui/core';
 
-const socket = io('http://calculator-app-server.herokuapp.com/')
+const socket = io('https://calculator-app-server.herokuapp.com/')
 
 export default class Calculator extends React.Component {
 
