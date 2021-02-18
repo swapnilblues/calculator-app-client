@@ -69,35 +69,27 @@ export default class Calculator extends React.Component {
         })
     }
 
-    renderChat = () => {
-        return this.state.chat.map(({name, message}, index) => (
-            <div key={index}>
-                <h3>
-                    {name}: <span>{message}</span>
-                </h3>
-            </div>
-        ))
-    }
-
-
     render() {
         return (
             <div>
                 <div className="card">
-                    <form>
+                    <form className="bg-color-calculate">
                         <h1>Calculator</h1>
                         <div className="name-field">
                             <input
+                                className="form-control"
                                 name="name"
                                 value={this.state.name}
                                 disabled
-                                label="Name"
+                                id="Name"
                             />
                         </div>
                         <div>
                             <input
                                 name="message"
+                                className="form-control"
                                 type="number"
+                                placeholder="Enter First Number"
                                 onChange={async (e) =>
                                     await this.setState({
                                         num1: parseInt(e.target.value)
@@ -105,13 +97,12 @@ export default class Calculator extends React.Component {
                                 }
                                 value={this.state.num1}
                                 id="outlined-multiline-static"
-                                variant="outlined"
-                                label="First Number"
                             />
                         </div>
                         <div className="top-margin bottom-margin">
                             <select
                                 name="message"
+                                className="custom-select"
                                 onChange={(e) =>
                                     this.setState({
                                         symbol: e.target.value
@@ -129,7 +120,9 @@ export default class Calculator extends React.Component {
                         <div>
                             <input
                                 name="message"
+                                className="form-control"
                                 type="number"
+                                placeholder="Enter Second Number"
                                 onChange={async (e) =>
                                     await this.setState({
                                         num2: parseInt(e.target.value)
@@ -157,7 +150,7 @@ export default class Calculator extends React.Component {
                                     !isNaN(this.state.num2)
                                 ) &&
                                 <button
-                                    className="btn btn-primary"
+                                    className="btn btn-dark"
                                     type="submit"
                                     onClick={this.calculate}
                                 >
@@ -169,9 +162,16 @@ export default class Calculator extends React.Component {
 
                         </div>
                     </form>
-                    <div className="render-chat">
+                    <div className="render-chat bg-color-calculate">
                         <h1>Calculator Log</h1>
-                        {this.renderChat()}
+                        {this.state.chat.map(({name, message}, index) => (
+                            <div key={index}>
+                                <h3 className="text-warning">
+                                    {name}: <span>{message}</span>
+                                </h3>
+                            </div>
+                        ))
+                        }
                     </div>
                 </div>
             </div>

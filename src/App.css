@@ -45,8 +45,12 @@
   margin: 100px;
 }
 
-.bg-color {
+.bg-color-entry {
   background-color: aquamarine;
+}
+
+.bg-color-calculate {
+  background-color: grey;
 }
 
 .card {
