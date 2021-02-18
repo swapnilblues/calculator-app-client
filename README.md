@@ -18,4 +18,4 @@
 * Hit the [backend server](https://calculator-app-server.herokuapp.com/) hosted on Heroku and make sure it is awoken.
 * Hit the [frontend app](https://calculator-app-client.herokuapp.com/) hosted on Heroku and please wait for it to be awoken.
 
-[Backend Server Respository](https://github.com/swapnilblues/calculator-app-server)
+[Backend Server Repository](https://github.com/swapnilblues/calculator-app-server)

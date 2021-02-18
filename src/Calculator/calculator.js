@@ -166,9 +166,9 @@ export default class Calculator extends React.Component {
                         <h1>Calculator Log</h1>
                         {this.state.chat.map(({name, message}, index) => (
                             <div key={index}>
-                                <h3 className="text-warning">
+                                <h4 className="text-warning">
                                     {name}: <span>{message}</span>
-                                </h3>
+                                </h4>
                             </div>
                         ))
                         }
