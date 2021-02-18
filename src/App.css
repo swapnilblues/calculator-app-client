@@ -66,6 +66,10 @@ form {
   margin-bottom: 40px;
 }
 
+.entry-field {
+  margin-top: 20px;
+}
+
 button {
   margin-top: 20px;
   padding: 10px;

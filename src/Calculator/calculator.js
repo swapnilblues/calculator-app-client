@@ -1,7 +1,5 @@
 import React from "react";
 import io from 'socket.io-client'
-// import {TextField} from '@material-ui/core'
-// import {Button} from '@material-ui/core';
 
 const socket = io('https://calculator-app-server.herokuapp.com/')
 
@@ -9,8 +7,8 @@ export default class Calculator extends React.Component {
 
     state = {
         message: '',
-        num1: '',
-        num2: '',
+        num1: NaN,
+        num2: NaN,
         symbol: '+',
         name: '',
         chat: [],
@@ -67,7 +65,7 @@ export default class Calculator extends React.Component {
 
         await socket.emit('a', this.state.name, this.state.message)
         await this.setState({
-            message: ''
+            message: '',
         })
     }
 
@@ -139,18 +137,15 @@ export default class Calculator extends React.Component {
                                 }
                                 value={this.state.num2}
                                 id="outlined-multiline-static"
-                                // variant="outlined"
-                                // label="Second Number"
                             />
                         </div>
                         <div className={"calculate-button"}>
                             {
-                                (this.state.num1 === '' ||
-                                    this.state.num2 === ''
+                                (isNaN(this.state.num1) ||
+                                    isNaN(this.state.num2)
                                 ) &&
                                 <button
-                                    disabled
-                                    // variant="contained"
+                                    className="btn btn-secondary disabled"
                                 >
                                     Calculate
                                 </button>
@@ -158,13 +153,12 @@ export default class Calculator extends React.Component {
                             }
 
                             {
-                                (this.state.num1 !== '' &&
-                                    this.state.num2 !== ''
+                                (!isNaN(this.state.num1) &&
+                                    !isNaN(this.state.num2)
                                 ) &&
                                 <button
-
-                                    color={"secondary"}
-                                    // variant="contained"
+                                    className="btn btn-primary"
+                                    type="submit"
                                     onClick={this.calculate}
                                 >
                                     Calculate

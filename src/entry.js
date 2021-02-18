@@ -21,8 +21,8 @@ export default class Entry extends React.Component {
                {   !this.state.submit &&
                <div className="login-form left-margin">
                    <form className="bg-color">
-                       <h1>Calculator</h1>
-                       <div className="name-field">
+                       <h3>Welcome to Calculator</h3>
+                       <div className="entry-field">
                            <input
                                onChange={async (e) =>
                                    await this.setState({
@@ -36,8 +36,7 @@ export default class Entry extends React.Component {
                        {
                            this.state.name === '' &&
                            <button
-                               disabled
-                               // variant="contained"
+                               className="btn btn-secondary disabled"
                            >
                                Enter
                            </button>
@@ -47,9 +46,8 @@ export default class Entry extends React.Component {
                        {
                            this.state.name !== '' &&
                            <button
-
-                               color={"secondary"}
-                               // variant="contained"
+                               className="btn btn-primary"
+                               type="submit"
                                onClick={this.submit}
                            >
                                Enter
